@@ -1,4 +1,13 @@
+import Videos from "../Videos";
 
 export default function Home() {
-  return <div>Hello</div>;
+  return (
+    <>
+      <Videos />
+      <Videos />
+      <Videos />
+      <Videos />
+      <Videos />
+    </>
+  );
 }
