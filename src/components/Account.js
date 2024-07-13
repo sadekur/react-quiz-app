@@ -1,26 +1,33 @@
-import React from 'react';
+import React from "react";
 import classes from "../styles/Account.module.css";
-import { Link } from 'react-router-dom';
-
-const loadIconFont = () => {
-  const link = document.createElement('link');
-  link.href = 'https://fonts.googleapis.com/icon?family=Material+Icons+Outlined';
-  link.rel = 'stylesheet';
-  document.head.appendChild(link);
-};
+import { useAuth } from "../contexts/AuthContext";
+import { Link } from "react-router-dom";
 
 export default function Account() {
-  React.useEffect(() => {
-    loadIconFont();
-  }, []);
-
+  const { currentUser, logout } = useAuth();
   return (
     <div className={classes.account}>
-      <span className="material-icons-outlined" title="Account">
-        account_circle
-      </span>
-      <Link to="/signup">Signup</Link>
-      <Link to="/login">Login</Link>
+      {currentUser ? (
+        <>
+          <span className="material-icons-outlined" title="Account">
+            account_circle
+          </span>
+          <span>{currentUser.displayName}</span>
+          <span
+            className="material-icons-outlined"
+            title="Logout"
+            onClick={logout}
+          >
+            {" "}
+            logout{" "}
+          </span>
+        </>
+      ) : (
+        <>
+          <Link to="/signup">Signup</Link>
+          <Link to="/login">Login</Link>
+        </>
+      )}
     </div>
   );
 }

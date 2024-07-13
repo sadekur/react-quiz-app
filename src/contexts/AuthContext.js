@@ -23,9 +23,10 @@ export function AuthProvider({children}) {
     async function signup(email, password, username) {
       const auth = getAuth();
       await createUserWithEmailAndPassword(auth, email, password);
+
       await updateProfile(auth.currentUser, {
-        displayName: username
-      });
+      displayName: username,
+    });
       const user = auth.currentUser;
       setcurrentUser({
         ...user,
@@ -51,9 +52,9 @@ export function AuthProvider({children}) {
       logout,
     };
 
-  return (
-    <AuthContext.Provider value={{value}} >
+    return (
+      <AuthContext.Provider value={value}>
         {!loading && children}
-    </AuthContext.Provider>
-  );
+      </AuthContext.Provider>
+    );
 }
